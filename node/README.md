@@ -3,6 +3,7 @@
 ## Verify Things
   - Make Sure you have installed latest `node` , you can check it by `node -v`
   - Make Sure you have installed `npm` , you can check it by `npm -v`
+  - Make Sure you have installed `mongo` or you can use any url in `.env` file 
 ## Setup Project
   - Navigate to project directory. Install Dependency by run `npm install`
   - Copy `.sample-env` to `.env` file.
