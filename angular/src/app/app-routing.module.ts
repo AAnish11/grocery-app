@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: AppComponent
+    redirectTo: APP_PRODUCT_LIST
   },
   {
     path: APP_PRODUCT_LIST,

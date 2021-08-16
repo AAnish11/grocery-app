@@ -1,4 +1,3 @@
-import { Mongoose } from "mongoose";
 import { DBActionResponse } from "../../interfaces/db-action.interface";
 import { AddCart, CartData, UpdateCart } from "../../interfaces/cart.interface";
 // import schema
@@ -19,7 +18,7 @@ export default class CartService {
                         productDescription: productDescription,
                         productId: _id,
                         productPrice: productPrice,
-                        qty: cart.qty,
+                        qty: cart.qty ? cart.qty : 1,
                         _id: cart._id
                     };
                     modifiedCartItems.push(newObj); 
@@ -27,7 +26,6 @@ export default class CartService {
             });
             return modifiedCartItems;
         } catch (e) {
-            console.log(e);
             // In case of error returning empty product data
             return [] as CartData[];
         }
@@ -67,7 +65,6 @@ export default class CartService {
         try {
             //Insert new product data into db
             const cartItemObj = await CartModel.updateOne({ _id: cartId }, { $set: { qty: cartItem.qty } });
-            console.log(cartItemObj);
             return {
                 hasError: false
             }
