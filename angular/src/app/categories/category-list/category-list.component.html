@@ -1,0 +1,26 @@
+<div class="mt-2 col-md-12">
+    <div class="col-2 ">
+        <a class="btn btn-primary pull-right" [routerLink]="addNewCategory">Add New Category</a>
+    </div>
+</div>
+<div class="mt-2 col-md-12">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="cateData.length === 0; else loadCategories">
+                <td colspan="2">No Categories found!</td>
+            </tr>
+            <ng-template #loadCategories>
+                <tr *ngFor="let category of cateData; let i = index">
+                    <td scope="row">{{i + 1}}</td>
+                    <td>{{category.categoryName}}</td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>

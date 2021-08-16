@@ -1,0 +1,1 @@
+export const DEFAULT_DESC_TEXT = 'This is dummy text for the description';

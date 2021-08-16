@@ -1,0 +1,14 @@
+<form [formGroup]="categoryFormG">
+    <div class="form-group">
+        <label for="productName">Category Name*</label>
+        <input type="text" class="form-control" placeholder="Enter Category Name" formControlName="categoryName">
+        <span *ngIf="categoryFormG.controls['categoryName'].touched">
+            <span *ngIf="categoryFormG.controls['categoryName'].errors?.required"  class="text text-danger">Please enter category name.</span>
+        <span *ngIf="categoryFormG.controls['categoryName'].errors?.minlength" class="text text-danger">Category name must have min 3 character.</span>
+        </span>
+
+    </div>
+    <div class="form-group my-2">
+        <button [disabled]="!categoryFormG.valid || isSubmitting" type="submit" (click)="onFormSubmitHandler()" class="btn btn-primary">Submit</button>
+    </div>
+</form>

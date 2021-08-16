@@ -1,0 +1,13 @@
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a class="navbar-brand">{{appTitle}} </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li *ngFor="let menu of menus">
+                    <a class="nav-link" [routerLink]="menu.path" routerLinkActive="active">{{menu.title}}</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</header>

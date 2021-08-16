@@ -1,0 +1,54 @@
+<form [formGroup]="productFormG" #f>
+    <div class="form-group">
+        <label for="productName">Select Category*</label>
+        <div *ngIf="(categories$ | async) as categories;">
+            <select *ngIf="categories.length > 0; else addNewCategory" class="form-control" formControlName="categoryId">
+                <option value="">Select Category</option>
+                <option [value]="cat._id" *ngFor="let cat of categories">{{cat.categoryName}}</option>
+            </select>
+            <ng-template #addNewCategory>
+                <div class="col-2 ">
+                    <a class="btn btn-primary" [routerLink]="addNewCategoryPath">Add New Category</a>
+                </div>
+            </ng-template>
+            <span *ngIf="productFormG.controls['categoryId'].errors?.required" class="text text-danger">Please select category.</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="productName">Product Name*</label>
+        <input type="text" class="form-control" placeholder="Enter Product Name" formControlName="productName">
+        <span *ngIf="productFormG.controls['productName'].touched">
+            <span *ngIf="productFormG.controls['productName'].errors?.required"  class="text text-danger">Please enter product name.</span>
+        <span *ngIf="productFormG.controls['productName'].errors?.minlength" class="text text-danger">Product name must have min 3 character.</span>
+        </span>
+    </div>
+    <div class="form-group my-4">
+        <label for="exampleInputPassword1">Product Description*</label>
+        <textarea class="form-control" formControlName="productDescription" cols="5"></textarea>
+        <span *ngIf="productFormG.controls['productDescription'].touched">
+            <span *ngIf="productFormG.controls['productDescription'].errors?.required"  class="text text-danger">Please enter product description.</span>
+        <span *ngIf="productFormG.controls['productDescription'].errors?.minlength" class="text text-danger">Product description must have min 10 character.</span>
+        </span>
+    </div>
+    <div class="form-group my-4">
+        <label for="productName">Product Price*</label>
+        <input type="text" class="form-control" placeholder="Enter Product Price" formControlName="productPrice">
+        <span *ngIf="productFormG.controls['productPrice'].touched">
+            <span *ngIf="productFormG.controls['productPrice'].errors?.required"  class="text text-danger">Please enter product price.</span>
+        <span *ngIf="productFormG.controls['productPrice'].errors?.min" class="text text-danger">Product price must be greater than 0.</span>
+        </span>
+
+    </div>
+    <div class="form-group my-4">
+        <label for="productName">Product Unit*</label>
+        <input type="number" class="form-control" formControlName="productUnit">
+        <span *ngIf="productFormG.controls['productUnit'].touched">
+            <span *ngIf="productFormG.controls['productUnit'].errors?.required"  class="text text-danger">Please enter product unit.</span>
+        <span *ngIf="productFormG.controls['productUnit'].errors?.min" class="text text-danger">Product price unit be greater than 0.</span>
+        </span>
+    </div>
+    <div class="form-group my-2">
+        <button type="submit" [disabled]="!productFormG.valid || isSubmitting" (click)="onFormSubmitHandler()" class="btn btn-primary">Submit</button>
+        <a [routerLink]="['/', productListPath]" class="btn btn-warning mx-2">Cancel</a>
+    </div>
+</form>

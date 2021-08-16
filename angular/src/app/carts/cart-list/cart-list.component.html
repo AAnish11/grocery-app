@@ -1,0 +1,27 @@
+<div class="mt-2 col-md-12" *ngIf="cartItem$ | async as cartItems">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Qty</th>
+                <th scope="col">Product Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="cartItems.length === 0; else loadCartItems">
+                <td colspan="5" class="text-center">No Cart Items found!</td>
+            </tr>
+            <ng-template #loadCartItems>
+                <tr *ngFor="let item of cartItems; let i = index">
+                    <td scope="row">{{i + 1}}</td>
+                    <td>{{item.productName}}</td>
+                    <td>{{item.qty}}</td>
+                    <td>{{+item.productPrice * +item.qty}}</td>
+                    <td><a class="btn btn-danger" (click)="onCartItemRemoveHandler(item._id)">Delete Item</a></td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>

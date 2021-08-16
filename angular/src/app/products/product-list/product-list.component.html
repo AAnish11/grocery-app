@@ -1,0 +1,23 @@
+<div class="alert alert-success" role="alert" *ngIf="showCartAddAlert$ | async">
+    Product successfully added to cart!
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="deleteProductAlert$ | async">
+    Product successfully deleted!
+</div>
+
+<div class="mt-2 col-md-12 mb-4">
+    <div class="col-2 ">
+        <a class="btn btn-primary pull-right" [routerLink]="addNewProduct">Add New Product</a>
+    </div>
+</div>
+<div *ngIf="productListData$ | async as itemData; else noDataFound">
+    <div *ngIf="itemData.length; else noDataFound" class="row">
+        <div class="col-md-4" *ngFor="let item of itemData">
+            <app-product-list-item [item]="item" (deleteProductCallback)="onDeleteProductHandler($event)" (addToCartHandler)="onAddToCartHandler($event)"></app-product-list-item>
+        </div>
+    </div>
+</div>
+<ng-template #noDataFound>
+    No Products found!
+</ng-template>
